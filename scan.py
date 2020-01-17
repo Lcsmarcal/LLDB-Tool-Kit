@@ -25,9 +25,10 @@ def scan(debugger, command, exe_ctx, result, internal_dict):
         symbol = symbol_context.addr.GetSymbolContext(lldb.eSymbolContextEverything)
         symbol_name = symbol.symbol.name
         addr = hex(symbol.symbol.addr.GetLoadAddress(target))
-        finalStr = symbol_name
-        finalStr += '\n'+addr+'\n\n'
-        print(finalStr)
+        if "static" in symbol_name:
+            finalStr = symbol_name
+            finalStr += '\n'+addr+'\n\n'
+            print(finalStr)
 
 
 def generate_args():
